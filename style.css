@@ -1,0 +1,53 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, min-content);
+    position: fixed;
+    width: min-content;
+    height: min-content;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    border: 1px black solid;
+}
+
+#one,
+#two,
+#three {
+    border-top: none;
+}
+
+#three,
+#six,
+#nine {
+    border-right: none;
+}
+
+#seven,
+#eight,
+#nine {
+    border-bottom: none;
+}
+
+#one,
+#four,
+#seven {
+    border-left: none;
+}
