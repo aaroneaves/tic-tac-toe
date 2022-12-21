@@ -54,3 +54,10 @@ body {
 #seven {
     border-left: none;
 }
+
+.narrator {
+    text-align: center;
+    font-weight: bold;
+    font-size: 75px;
+    margin-top: 40px;
+}
