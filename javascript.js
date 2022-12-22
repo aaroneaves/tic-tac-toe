@@ -1,3 +1,6 @@
+const narrator = document.querySelector('.narrator');
+narrator.textContent = "Player's turn!"
+
 const x = "x";
 const o = "o";
 
@@ -32,7 +35,6 @@ const displayController = (function() {
     return { populateGameBoard };
 })();
 
-displayController.populateGameBoard();
 
 let playerFactory = {
     //make into factory
@@ -40,67 +42,98 @@ let playerFactory = {
 }
 
 one.addEventListener('click', () => {
-    if (gameBoard.board[1]) {
+    if (gameBoard.board[1] || computer.turn || gameOver) {
         return;
     } else {
         gameBoard.board[1] = x;
-        displayController.populateGameBoard();
+        processTurn();
     }
 });
 
 two.addEventListener('click', () => {
-    gameBoard.board[2] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[2] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[2] = x;
+        processTurn();
+    }
 });
 
 three.addEventListener('click', () => {
-    gameBoard.board[3] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[3] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[3] = x;
+        processTurn();
+    }
 });
 
 four.addEventListener('click', () => {
-    gameBoard.board[4] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[4] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[4] = x;
+        processTurn();
+    }
 });
 
 five.addEventListener('click', () => {
-    gameBoard.board[5] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[5] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[5] = x;
+        processTurn();
+    }
 });
 
 six.addEventListener('click', () => {
-    gameBoard.board[6] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[6] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[6] = x;
+        processTurn();
+    }
 });
 
 seven.addEventListener('click', () => {
-    gameBoard.board[7] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[7] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[7] = x;
+        processTurn();
+    }
 });
 
 eight.addEventListener('click', () => {
-    gameBoard.board[8] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[8] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[8] = x;
+        processTurn();
+    }
 });
 
 nine.addEventListener('click', () => {
-    gameBoard.board[9] = x;
-    displayController.populateGameBoard();
+    if (gameBoard.board[9] || computer.turn || gameOver) {
+        return;
+    } else {
+        gameBoard.board[9] = x;
+        processTurn();
+    }
 });
 
-const narrator = document.querySelector('.narrator');
-narrator.textContent = "Player's turn!"
-
-let player;
+let player = {
+    turn: true
+}
 
 let computer = {
     turn: false
 };
 
+let gameOver = false;
 
 const computerTakesTurn = function() {
     let choice = null;
-    computer.turn = true;
     function getRandomNumber() {
         const min = Math.ceil(1);
         const max = Math.floor(10);
@@ -111,15 +144,40 @@ const computerTakesTurn = function() {
         getRandomNumber();
         if (gameBoard.board[choice] == null) {
             gameBoard.board[choice] = o;
-            displayController.populateGameBoard();
-            computer.turn = false;
+            processTurn();
         } 
     };
 };
 
-computerTakesTurn();
+processTurn = function () {
+    displayController.populateGameBoard();
+    checkForGameOver();
+    if (gameOver) {
+        narrator.textContent = "Game Over!";
+    }
+}
 
-let game = {
-    //make into module
-    //game data goes here
+checkForGameOver = function () {
+    if (gameBoard.board[1] == gameBoard.board[2] && gameBoard.board[1] == gameBoard.board[3] && gameBoard.board[1]) gameOver = true;
+    if (gameBoard.board[4] == gameBoard.board[5] && gameBoard.board[4] == gameBoard.board[6] && gameBoard.board[4]) gameOver = true;
+    if (gameBoard.board[7] == gameBoard.board[8] && gameBoard.board[7] == gameBoard.board[9] && gameBoard.board[7]) gameOver = true;
+    if (gameBoard.board[1] == gameBoard.board[4] && gameBoard.board[1] == gameBoard.board[7] && gameBoard.board[1]) gameOver = true;
+    if (gameBoard.board[2] == gameBoard.board[5] && gameBoard.board[2] == gameBoard.board[8] && gameBoard.board[2]) gameOver = true;
+    if (gameBoard.board[3] == gameBoard.board[6] && gameBoard.board[3] == gameBoard.board[9] && gameBoard.board[3]) gameOver = true;
+    if (gameBoard.board[1] == gameBoard.board[5] && gameBoard.board[1] == gameBoard.board[9] && gameBoard.board[1]) gameOver = true;
+    if (gameBoard.board[7] == gameBoard.board[5] && gameBoard.board[7] == gameBoard.board[3] && gameBoard.board[7]) gameOver = true;
+    if (gameBoard.board[1] && gameBoard.board[2] && gameBoard.board[3] && gameBoard.board[4] && gameBoard.board[5] && gameBoard.board[6] && gameBoard.board[7] && gameBoard.board[8] && gameBoard.board[9]) gameOver = true;
+    
+    if (gameOver) return;
+
+    if (player.turn) {
+        player.turn = false;
+        computer.turn = true;
+        narrator.textContent = "Computer's Turn!";
+        computerTakesTurn();
+    } else {
+        player.turn = true;
+        computer.turn = false;
+        narrator.textContent = "Player's Turn!";
+    };
 }
