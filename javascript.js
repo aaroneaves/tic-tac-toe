@@ -139,14 +139,13 @@ const computerTakesTurn = function() {
         const max = Math.floor(10);
         choice = Math.floor(Math.random() * (max - min) + min);
     };
-
-    while (computer.turn) {
-        getRandomNumber();
-        if (gameBoard.board[choice] == null) {
-            gameBoard.board[choice] = o;
-            processTurn();
-        } 
-    };
+    getRandomNumber();
+    if (gameBoard.board[choice] == null) {
+        gameBoard.board[choice] = o;
+        processTurn();
+    } else {
+        computerTakesTurn();
+    }
 };
 
 processTurn = function () {
