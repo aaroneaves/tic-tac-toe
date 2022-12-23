@@ -62,10 +62,19 @@ body {
     margin-top: 40px;
 }
 
-.meta-data {
-    border: 1px solid black;
-    width: 200px;
+.left-container {
     margin-left: 40px;
+    display: grid;
+    width: min-content;
+    justify-items: center;
+    row-gap: 20px;
+}
+
+.meta-data {
+    border: 2px solid black;
+    width: 200px;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.243);
     font-weight: bold;
     font-size: 28px;
     display: grid;
@@ -81,4 +90,20 @@ body {
 
 .wins {
     text-align: center;
+}
+
+.reset {
+    background-color: red;
+}
+
+.new-game {
+    background-color: green;
+}
+
+button {
+    width: 140px;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
 }
