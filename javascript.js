@@ -305,13 +305,18 @@ reset.addEventListener('click', () => {
     gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
     player.wins = 0;
     computer.wins = 0;
+    player.turn = false;
+    computer.turn = false;
+    player.symbol = null;
+    computer.symbol = null;
     displayController.populateGameBoard();
     playerWinTally.textContent = player.wins;
     computerWinTally.textContent = computer.wins;
-    gameOver = false;
-    player.turn = true;
-    computer.turn = false;
-    narrator.textContent = "Player's Turn!";
+    narrator.textContent = "Pick X or O!";
+    xButton.style.display = 'inline';
+    oButton.style.display = 'inline';
+    reset.style.display = 'none';
+    newGame.style.display = 'none';
 });
 
 const newGame = document.querySelector('.new-game');
@@ -321,9 +326,21 @@ newGame.addEventListener('click', () => {
         gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
         displayController.populateGameBoard();
         gameOver = false;
-        player.turn = true;
-        computer.turn = false;
-        narrator.textContent = "Player's Turn!";
+        if (player.symbol == x) {
+            player.turn = true;
+            computer.turn = false;
+            narrator.textContent = "Player's Turn!";
+        } else {
+            player.turn = false;
+            computer.turn = true;
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+            const delayedTurn = async () => {
+                narrator.textContent = "Computer's Turn!";
+                await delay(750);
+                computerTakesTurn();
+            };
+            delayedTurn();       
+        }
     } else {
         alert("You have to finish this game first!")
     }
