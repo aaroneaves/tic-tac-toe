@@ -1,5 +1,5 @@
 const narrator = document.querySelector('.narrator');
-narrator.textContent = "Player's Turn!";
+narrator.textContent = "Pick X or O!";
 
 const x = "x";
 const o = "o";
@@ -124,12 +124,14 @@ nine.addEventListener('click', () => {
 
 let player = {
     turn: true,
-    wins: 0
+    wins: 0,
+    symbol: null
 }
 
 let computer = {
     turn: false,
-    wins: 0
+    wins: 0,
+    symbol: null
 };
 
 const playerWinTally = document.querySelector('#player-wins');
@@ -323,4 +325,18 @@ newGame.addEventListener('click', () => {
     } else {
         alert("You have to finish this game first!")
     }
+});
+
+gameOver = true;
+
+const xButton = document.querySelector('#x-button');
+xButton.addEventListener('click', () => {
+    player.symbol = x;
+    computer.symbol = o;
+});
+
+const oButton = document.querySelector('#o-button');
+oButton.addEventListener('click', () => {
+    player.symbol = o;
+    computer.symbol = x;
 });
