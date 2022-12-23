@@ -174,6 +174,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -188,6 +189,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -202,6 +204,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -216,6 +219,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -230,6 +234,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -244,6 +249,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -258,6 +264,7 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
@@ -272,12 +279,14 @@ checkForGameOver = function () {
         }
         playerWinTally.textContent = player.wins;
         computerWinTally.textContent = computer.wins;
+        newGame.style.display = 'inline';
         return;
     };
 
     if (gameBoard.board[1] && gameBoard.board[2] && gameBoard.board[3] && gameBoard.board[4] && gameBoard.board[5] && gameBoard.board[6] && gameBoard.board[7] && gameBoard.board[8] && gameBoard.board[9]) {
         gameOver = true;
         narrator.textContent = "It's a Tie!";
+        newGame.style.display = 'inline';
         return;
     };
     
@@ -322,27 +331,24 @@ reset.addEventListener('click', () => {
 const newGame = document.querySelector('.new-game');
 newGame.style.display = 'none';
 newGame.addEventListener('click', () => {
-    if (gameOver) {
-        gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
-        displayController.populateGameBoard();
-        gameOver = false;
-        if (player.symbol == x) {
-            player.turn = true;
-            computer.turn = false;
-            narrator.textContent = "Player's Turn!";
-        } else {
-            player.turn = false;
-            computer.turn = true;
-            const delay = ms => new Promise(res => setTimeout(res, ms));
-            const delayedTurn = async () => {
-                narrator.textContent = "Computer's Turn!";
-                await delay(750);
-                computerTakesTurn();
-            };
-            delayedTurn();       
-        }
+    gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
+    displayController.populateGameBoard();
+    gameOver = false;
+    newGame.style.display = 'none';
+    if (player.symbol == x) {
+        player.turn = true;
+        computer.turn = false;
+        narrator.textContent = "Player's Turn!";
     } else {
-        alert("You have to finish this game first!")
+        player.turn = false;
+        computer.turn = true;
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        const delayedTurn = async () => {
+            narrator.textContent = "Computer's Turn!";
+            await delay(750);
+            computerTakesTurn();
+        };
+        delayedTurn();       
     }
 });
 
@@ -359,7 +365,6 @@ xButton.addEventListener('click', () => {
     xButton.style.display = 'none';
     oButton.style.display = 'none';
     reset.style.display = 'inline';
-    newGame.style.display = 'inline';
 });
 
 const oButton = document.querySelector('#o-button');
@@ -372,7 +377,6 @@ oButton.addEventListener('click', () => {
     xButton.style.display = 'none';
     oButton.style.display = 'none';
     reset.style.display = 'inline';
-    newGame.style.display = 'inline';
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const delayedTurn = async () => {
         narrator.textContent = "Computer's Turn!";
