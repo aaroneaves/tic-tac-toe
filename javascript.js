@@ -123,12 +123,19 @@ nine.addEventListener('click', () => {
 });
 
 let player = {
-    turn: true
+    turn: true,
+    wins: 0
 }
 
 let computer = {
-    turn: false
+    turn: false,
+    wins: 0
 };
+
+const playerWinTally = document.querySelector('#player-wins');
+playerWinTally.textContent = player.wins;
+const computerWinTally = document.querySelector('#computer-wins');
+computerWinTally.textContent = computer.wins;
 
 let gameOver = false;
 
@@ -158,9 +165,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[1] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -168,9 +179,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[4] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -178,9 +193,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[7] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -188,9 +207,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[1] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -198,9 +221,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[2] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -208,9 +235,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[3] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -218,9 +249,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[1] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 
@@ -228,9 +263,13 @@ checkForGameOver = function () {
         gameOver = true;
         if (gameBoard.board[7] == x) {
             narrator.textContent = "Player Wins!";
+            player.wins += 1;
         } else {
             narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
         }
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
         return;
     };
 

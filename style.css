@@ -61,3 +61,24 @@ body {
     font-size: 75px;
     margin-top: 40px;
 }
+
+.meta-data {
+    border: 1px solid black;
+    width: 200px;
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 28px;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 11px;
+    row-gap: 10px;
+}
+
+.meta-left {
+    text-align: right;
+}
+
+.wins {
+    text-align: center;
+}
