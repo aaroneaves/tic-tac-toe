@@ -308,4 +308,19 @@ reset.addEventListener('click', () => {
     gameOver = false;
     player.turn = true;
     computer.turn = false;
+    narrator.textContent = "Player's Turn!";
+});
+
+const newGame = document.querySelector('.new-game');
+newGame.addEventListener('click', () => {
+    if (gameOver) {
+        gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
+        displayController.populateGameBoard();
+        gameOver = false;
+        player.turn = true;
+        computer.turn = false;
+        narrator.textContent = "Player's Turn!";
+    } else {
+        alert("You have to finish this game first!")
+    }
 });
