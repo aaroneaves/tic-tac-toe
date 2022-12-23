@@ -240,13 +240,17 @@ checkForGameOver = function () {
         return;
     };
     
-    // if (gameOver) return;
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     if (player.turn) {
         player.turn = false;
         computer.turn = true;
-        narrator.textContent = "Computer's Turn!";
-        computerTakesTurn();
+        const delayedTurn = async () => {
+            narrator.textContent = "Computer's Turn!";
+            await delay(750);
+            computerTakesTurn();
+        };
+        delayedTurn();
     } else {
         player.turn = true;
         computer.turn = false;
