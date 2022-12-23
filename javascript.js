@@ -300,6 +300,7 @@ checkForGameOver = function () {
 }
 
 const reset = document.querySelector('.reset');
+reset.style.display = 'none';
 reset.addEventListener('click', () => {
     gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
     player.wins = 0;
@@ -314,6 +315,7 @@ reset.addEventListener('click', () => {
 });
 
 const newGame = document.querySelector('.new-game');
+newGame.style.display = 'none';
 newGame.addEventListener('click', () => {
     if (gameOver) {
         gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
@@ -339,6 +341,8 @@ xButton.addEventListener('click', () => {
     computer.turn = false;
     xButton.style.display = 'none';
     oButton.style.display = 'none';
+    reset.style.display = 'inline';
+    newGame.style.display = 'inline';
 });
 
 const oButton = document.querySelector('#o-button');
@@ -350,6 +354,8 @@ oButton.addEventListener('click', () => {
     computer.turn = true;
     xButton.style.display = 'none';
     oButton.style.display = 'none';
+    reset.style.display = 'inline';
+    newGame.style.display = 'inline';
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const delayedTurn = async () => {
         narrator.textContent = "Computer's Turn!";
