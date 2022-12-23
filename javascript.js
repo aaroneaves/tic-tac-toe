@@ -1,5 +1,5 @@
 const narrator = document.querySelector('.narrator');
-narrator.textContent = "Player's turn!"
+narrator.textContent = "Player's Turn!";
 
 const x = "x";
 const o = "o";
@@ -151,23 +151,96 @@ const computerTakesTurn = function() {
 processTurn = function () {
     displayController.populateGameBoard();
     checkForGameOver();
-    if (gameOver) {
-        narrator.textContent = "Game Over!";
-    }
 }
 
 checkForGameOver = function () {
-    if (gameBoard.board[1] == gameBoard.board[2] && gameBoard.board[1] == gameBoard.board[3] && gameBoard.board[1]) gameOver = true;
-    if (gameBoard.board[4] == gameBoard.board[5] && gameBoard.board[4] == gameBoard.board[6] && gameBoard.board[4]) gameOver = true;
-    if (gameBoard.board[7] == gameBoard.board[8] && gameBoard.board[7] == gameBoard.board[9] && gameBoard.board[7]) gameOver = true;
-    if (gameBoard.board[1] == gameBoard.board[4] && gameBoard.board[1] == gameBoard.board[7] && gameBoard.board[1]) gameOver = true;
-    if (gameBoard.board[2] == gameBoard.board[5] && gameBoard.board[2] == gameBoard.board[8] && gameBoard.board[2]) gameOver = true;
-    if (gameBoard.board[3] == gameBoard.board[6] && gameBoard.board[3] == gameBoard.board[9] && gameBoard.board[3]) gameOver = true;
-    if (gameBoard.board[1] == gameBoard.board[5] && gameBoard.board[1] == gameBoard.board[9] && gameBoard.board[1]) gameOver = true;
-    if (gameBoard.board[7] == gameBoard.board[5] && gameBoard.board[7] == gameBoard.board[3] && gameBoard.board[7]) gameOver = true;
-    if (gameBoard.board[1] && gameBoard.board[2] && gameBoard.board[3] && gameBoard.board[4] && gameBoard.board[5] && gameBoard.board[6] && gameBoard.board[7] && gameBoard.board[8] && gameBoard.board[9]) gameOver = true;
+    if (gameBoard.board[1] == gameBoard.board[2] && gameBoard.board[1] == gameBoard.board[3] && gameBoard.board[1]){
+        gameOver = true;
+        if (gameBoard.board[1] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[4] == gameBoard.board[5] && gameBoard.board[4] == gameBoard.board[6] && gameBoard.board[4]) {
+        gameOver = true;
+        if (gameBoard.board[4] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[7] == gameBoard.board[8] && gameBoard.board[7] == gameBoard.board[9] && gameBoard.board[7]) {
+        gameOver = true;
+        if (gameBoard.board[7] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[1] == gameBoard.board[4] && gameBoard.board[1] == gameBoard.board[7] && gameBoard.board[1]) {
+        gameOver = true;
+        if (gameBoard.board[1] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[2] == gameBoard.board[5] && gameBoard.board[2] == gameBoard.board[8] && gameBoard.board[2]) {
+        gameOver = true;
+        if (gameBoard.board[2] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[3] == gameBoard.board[6] && gameBoard.board[3] == gameBoard.board[9] && gameBoard.board[3]) {
+        gameOver = true;
+        if (gameBoard.board[3] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[1] == gameBoard.board[5] && gameBoard.board[1] == gameBoard.board[9] && gameBoard.board[1]) {
+        gameOver = true;
+        if (gameBoard.board[1] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[7] == gameBoard.board[5] && gameBoard.board[7] == gameBoard.board[3] && gameBoard.board[7]) {
+        gameOver = true;
+        if (gameBoard.board[7] == x) {
+            narrator.textContent = "Player Wins!";
+        } else {
+            narrator.textContent = "Computer Wins!";
+        }
+        return;
+    };
+
+    if (gameBoard.board[1] && gameBoard.board[2] && gameBoard.board[3] && gameBoard.board[4] && gameBoard.board[5] && gameBoard.board[6] && gameBoard.board[7] && gameBoard.board[8] && gameBoard.board[9]) {
+        gameOver = true;
+        narrator.textContent = "It's a Tie!";
+        return;
+    };
     
-    if (gameOver) return;
+    // if (gameOver) return;
 
     if (player.turn) {
         player.turn = false;
