@@ -45,7 +45,7 @@ one.addEventListener('click', () => {
     if (gameBoard.board[1] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[1] = x;
+        gameBoard.board[1] = player.symbol;
         processTurn();
     }
 });
@@ -54,7 +54,7 @@ two.addEventListener('click', () => {
     if (gameBoard.board[2] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[2] = x;
+        gameBoard.board[2] = player.symbol;
         processTurn();
     }
 });
@@ -63,7 +63,7 @@ three.addEventListener('click', () => {
     if (gameBoard.board[3] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[3] = x;
+        gameBoard.board[3] = player.symbol;
         processTurn();
     }
 });
@@ -72,7 +72,7 @@ four.addEventListener('click', () => {
     if (gameBoard.board[4] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[4] = x;
+        gameBoard.board[4] = player.symbol;
         processTurn();
     }
 });
@@ -81,7 +81,7 @@ five.addEventListener('click', () => {
     if (gameBoard.board[5] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[5] = x;
+        gameBoard.board[5] = player.symbol;
         processTurn();
     }
 });
@@ -90,7 +90,7 @@ six.addEventListener('click', () => {
     if (gameBoard.board[6] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[6] = x;
+        gameBoard.board[6] = player.symbol;
         processTurn();
     }
 });
@@ -99,7 +99,7 @@ seven.addEventListener('click', () => {
     if (gameBoard.board[7] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[7] = x;
+        gameBoard.board[7] = player.symbol;
         processTurn();
     }
 });
@@ -108,7 +108,7 @@ eight.addEventListener('click', () => {
     if (gameBoard.board[8] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[8] = x;
+        gameBoard.board[8] = player.symbol;
         processTurn();
     }
 });
@@ -117,13 +117,13 @@ nine.addEventListener('click', () => {
     if (gameBoard.board[9] || computer.turn || gameOver) {
         return;
     } else {
-        gameBoard.board[9] = x;
+        gameBoard.board[9] = player.symbol;
         processTurn();
     }
 });
 
 let player = {
-    turn: true,
+    turn: false,
     wins: 0,
     symbol: null
 }
@@ -139,7 +139,7 @@ playerWinTally.textContent = player.wins;
 const computerWinTally = document.querySelector('#computer-wins');
 computerWinTally.textContent = computer.wins;
 
-let gameOver = false;
+let gameOver = true;
 
 const computerTakesTurn = function() {
     let choice = null;
@@ -150,7 +150,7 @@ const computerTakesTurn = function() {
     };
     getRandomNumber();
     if (gameBoard.board[choice] == null) {
-        gameBoard.board[choice] = o;
+        gameBoard.board[choice] = computer.symbol;
         processTurn();
     } else {
         computerTakesTurn();
@@ -165,7 +165,7 @@ processTurn = function () {
 checkForGameOver = function () {
     if (gameBoard.board[1] == gameBoard.board[2] && gameBoard.board[1] == gameBoard.board[3] && gameBoard.board[1]){
         gameOver = true;
-        if (gameBoard.board[1] == x) {
+        if (gameBoard.board[1] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -179,7 +179,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[4] == gameBoard.board[5] && gameBoard.board[4] == gameBoard.board[6] && gameBoard.board[4]) {
         gameOver = true;
-        if (gameBoard.board[4] == x) {
+        if (gameBoard.board[4] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -193,7 +193,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[7] == gameBoard.board[8] && gameBoard.board[7] == gameBoard.board[9] && gameBoard.board[7]) {
         gameOver = true;
-        if (gameBoard.board[7] == x) {
+        if (gameBoard.board[7] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -207,7 +207,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[1] == gameBoard.board[4] && gameBoard.board[1] == gameBoard.board[7] && gameBoard.board[1]) {
         gameOver = true;
-        if (gameBoard.board[1] == x) {
+        if (gameBoard.board[1] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -221,7 +221,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[2] == gameBoard.board[5] && gameBoard.board[2] == gameBoard.board[8] && gameBoard.board[2]) {
         gameOver = true;
-        if (gameBoard.board[2] == x) {
+        if (gameBoard.board[2] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -235,7 +235,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[3] == gameBoard.board[6] && gameBoard.board[3] == gameBoard.board[9] && gameBoard.board[3]) {
         gameOver = true;
-        if (gameBoard.board[3] == x) {
+        if (gameBoard.board[3] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -249,7 +249,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[1] == gameBoard.board[5] && gameBoard.board[1] == gameBoard.board[9] && gameBoard.board[1]) {
         gameOver = true;
-        if (gameBoard.board[1] == x) {
+        if (gameBoard.board[1] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -263,7 +263,7 @@ checkForGameOver = function () {
 
     if (gameBoard.board[7] == gameBoard.board[5] && gameBoard.board[7] == gameBoard.board[3] && gameBoard.board[7]) {
         gameOver = true;
-        if (gameBoard.board[7] == x) {
+        if (gameBoard.board[7] == player.symbol) {
             narrator.textContent = "Player Wins!";
             player.wins += 1;
         } else {
@@ -333,10 +333,28 @@ const xButton = document.querySelector('#x-button');
 xButton.addEventListener('click', () => {
     player.symbol = x;
     computer.symbol = o;
+    narrator.textContent = "Player's Turn!";
+    gameOver = false;
+    player.turn = true;
+    computer.turn = false;
+    xButton.style.display = 'none';
+    oButton.style.display = 'none';
 });
 
 const oButton = document.querySelector('#o-button');
 oButton.addEventListener('click', () => {
     player.symbol = o;
     computer.symbol = x;
+    gameOver = false;
+    player.turn = false;
+    computer.turn = true;
+    xButton.style.display = 'none';
+    oButton.style.display = 'none';
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const delayedTurn = async () => {
+        narrator.textContent = "Computer's Turn!";
+        await delay(750);
+        computerTakesTurn();
+    };
+    delayedTurn();
 });
