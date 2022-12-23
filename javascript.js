@@ -296,3 +296,16 @@ checkForGameOver = function () {
         narrator.textContent = "Player's Turn!";
     };
 }
+
+const reset = document.querySelector('.reset');
+reset.addEventListener('click', () => {
+    gameBoard.board = ["leave this blank", null, null, null, null, null, null, null, null, null];
+    player.wins = 0;
+    computer.wins = 0;
+    displayController.populateGameBoard();
+    playerWinTally.textContent = player.wins;
+    computerWinTally.textContent = computer.wins;
+    gameOver = false;
+    player.turn = true;
+    computer.turn = false;
+});
