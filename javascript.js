@@ -1,4 +1,9 @@
 const board = (function() {
+    const array = ["leave this blank", null, null, null, null, null, null, null, null, null];
+    const narrator = document.querySelector('.narrator');
+    const playerWinTally = document.querySelector('#player-wins');
+    const computerWinTally = document.querySelector('#computer-wins');
+
     const refreshDisplay = () => {
         //not entirely sure why these variables are globally scoped
         const one = document.querySelector('#one');
@@ -21,6 +26,7 @@ const board = (function() {
         eight.textContent = board.array[8];
         nine.textContent = board.array[9];
     };
+
     one.addEventListener('click', () => {
         if (board.array[1] || computer.turn || gameOver) {
             return;
@@ -29,6 +35,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     two.addEventListener('click', () => {
         if (board.array[2] || computer.turn || gameOver) {
             return;
@@ -37,6 +44,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     three.addEventListener('click', () => {
         if (board.array[3] || computer.turn || gameOver) {
             return;
@@ -45,6 +53,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     four.addEventListener('click', () => {
         if (board.array[4] || computer.turn || gameOver) {
             return;
@@ -53,6 +62,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     five.addEventListener('click', () => {
         if (board.array[5] || computer.turn || gameOver) {
             return;
@@ -61,6 +71,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     six.addEventListener('click', () => {
         if (board.array[6] || computer.turn || gameOver) {
             return;
@@ -69,6 +80,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     seven.addEventListener('click', () => {
         if (board.array[7] || computer.turn || gameOver) {
             return;
@@ -77,6 +89,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     eight.addEventListener('click', () => {
         if (board.array[8] || computer.turn || gameOver) {
             return;
@@ -85,6 +98,7 @@ const board = (function() {
             game.processTurn();
         }
     });
+
     nine.addEventListener('click', () => {
         if (board.array[9] || computer.turn || gameOver) {
             return;
@@ -94,44 +108,26 @@ const board = (function() {
         }
     });
 
-    const array = ["leave this blank", null, null, null, null, null, null, null, null, null];
-    const narrator = document.querySelector('.narrator');
-    const playerWinTally = document.querySelector('#player-wins');
-    const computerWinTally = document.querySelector('#computer-wins');
+    return { refreshDisplay, array, narrator, playerWinTally, computerWinTally };
 
-    return { refreshDisplay, array, narrator, playerWinTally, computerWinTally, one, two, three, four, five, six, seven, eight, nine };
 })();
-
-//Player stuff here
-
-const x = "x";
-const o = "o";
-
-let player = {
-    turn: false,
-    wins: 0,
-    symbol: null
-}
-
-let computer = {
-    turn: false,
-    wins: 0,
-    symbol: null
-};
-
-
-
 
 //game object here
 
 const game = (function() {
 
+    const initialize = function() {
+        board.narrator.textContent = "Pick X or O!";
+        reset.style.display = 'none';
+        nextRound.style.display = 'none';
+    };
+
     const xButton = document.querySelector('#x-button');
     xButton.addEventListener('click', () => {
         player.symbol = x;
         computer.symbol = o;
-        board.narrator.textContent = "Player's Turn!";
         gameOver = false;
+        board.narrator.textContent = "Player's Turn!";
         player.turn = true;
         computer.turn = false;
         adjustButtonDisplay();
@@ -154,6 +150,49 @@ const game = (function() {
         reset.style.display = 'inline';
     };
 
+    const nextRound = document.querySelector('.new-game');
+    nextRound.addEventListener('click', () => {
+        board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
+        board.refreshDisplay();
+        gameOver = false;
+        nextRound.style.display = 'none';
+        if (player.symbol == x) {
+            player.turn = true;
+            computer.turn = false;
+            board.narrator.textContent = "Player's Turn!";
+        } else {
+            player.turn = false;
+            computer.turn = true;
+            delayedTurn();       
+        }
+    });
+
+    const reset = document.querySelector('.reset');
+    reset.addEventListener('click', () => {
+        board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
+        player.wins = 0;
+        computer.wins = 0;
+        player.turn = false;
+        computer.turn = false;
+        player.symbol = null;
+        computer.symbol = null;
+        board.refreshDisplay();
+        board.playerWinTally.textContent = player.wins;
+        board.computerWinTally.textContent = computer.wins;
+        board.narrator.textContent = "Pick X or O!";
+        xButton.style.display = 'inline';
+        oButton.style.display = 'inline';
+        reset.style.display = 'none';
+        nextRound.style.display = 'none';
+    });
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const delayedTurn = async () => {
+        board.narrator.textContent = "Computer's Turn!";
+        await delay(750);
+        computerTakesTurn();
+    };
+
     const computerTakesTurn = function() {
         let choice = null;
         function getRandomNumber() {
@@ -164,7 +203,7 @@ const game = (function() {
         getRandomNumber();
         if (board.array[choice] == null) {
             board.array[choice] = computer.symbol;
-            game.processTurn();
+            processTurn();
         } else {
             computerTakesTurn();
         }
@@ -277,68 +316,29 @@ const game = (function() {
             computer.turn = false;
             board.narrator.textContent = "Player's Turn!";
         };
-    }
-
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    const delayedTurn = async () => {
-        board.narrator.textContent = "Computer's Turn!";
-        await delay(750);
-        game.computerTakesTurn();
     };
 
-    return { computerTakesTurn, processTurn, xButton, oButton };
+    return { processTurn, xButton, oButton, reset, nextRound, initialize };
 
 })();
 
+//Player stuff here
 
+const x = "x";
+const o = "o";
 
-const reset = document.querySelector('.reset');
-reset.addEventListener('click', () => {
-    board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
-    player.wins = 0;
-    computer.wins = 0;
-    player.turn = false;
-    computer.turn = false;
-    player.symbol = null;
-    computer.symbol = null;
-    board.refreshDisplay();
-    board.playerWinTally.textContent = player.wins;
-    board.computerWinTally.textContent = computer.wins;
-    board.narrator.textContent = "Pick X or O!";
-    game.xButton.style.display = 'inline';
-    game.oButton.style.display = 'inline';
-    reset.style.display = 'none';
-    nextRound.style.display = 'none';
-});
+let player = {
+    turn: false,
+    wins: 0,
+    symbol: null
+}
 
-const nextRound = document.querySelector('.new-game');
-nextRound.addEventListener('click', () => {
-    board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
-    board.refreshDisplay();
-    gameOver = false;
-    nextRound.style.display = 'none';
-    if (player.symbol == x) {
-        player.turn = true;
-        computer.turn = false;
-        board.narrator.textContent = "Player's Turn!";
-    } else {
-        player.turn = false;
-        computer.turn = true;
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        const delayedTurn = async () => {
-            board.narrator.textContent = "Computer's Turn!";
-            await delay(750);
-            game.computerTakesTurn();
-        };
-        delayedTurn();       
-    }
-});
+let computer = {
+    turn: false,
+    wins: 0,
+    symbol: null
+};
 
 //New game initializations here
-
-board.narrator.textContent = "Pick X or O!";
-board.playerWinTally.textContent = player.wins;
-board.computerWinTally.textContent = computer.wins;
 let gameOver = true;
-reset.style.display = 'none';
-nextRound.style.display = 'none';
+game.initialize();
