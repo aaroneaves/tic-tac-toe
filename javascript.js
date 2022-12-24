@@ -26,7 +26,7 @@ const board = (function() {
             return;
         } else {
             board.array[1] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     two.addEventListener('click', () => {
@@ -34,7 +34,7 @@ const board = (function() {
             return;
         } else {
             board.array[2] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     three.addEventListener('click', () => {
@@ -42,7 +42,7 @@ const board = (function() {
             return;
         } else {
             board.array[3] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     four.addEventListener('click', () => {
@@ -50,7 +50,7 @@ const board = (function() {
             return;
         } else {
             board.array[4] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     five.addEventListener('click', () => {
@@ -58,7 +58,7 @@ const board = (function() {
             return;
         } else {
             board.array[5] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     six.addEventListener('click', () => {
@@ -66,7 +66,7 @@ const board = (function() {
             return;
         } else {
             board.array[6] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     seven.addEventListener('click', () => {
@@ -74,7 +74,7 @@ const board = (function() {
             return;
         } else {
             board.array[7] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     eight.addEventListener('click', () => {
@@ -82,7 +82,7 @@ const board = (function() {
             return;
         } else {
             board.array[8] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
     nine.addEventListener('click', () => {
@@ -90,7 +90,7 @@ const board = (function() {
             return;
         } else {
             board.array[9] = player.symbol;
-            processTurn();
+            game.processTurn();
         }
     });
 
@@ -119,16 +119,41 @@ let computer = {
     symbol: null
 };
 
-//New game initializations here
 
-board.narrator.textContent = "Pick X or O!";
-board.playerWinTally.textContent = player.wins;
-board.computerWinTally.textContent = computer.wins;
-let gameOver = true;
+
 
 //game object here
 
 const game = (function() {
+
+    const xButton = document.querySelector('#x-button');
+    xButton.addEventListener('click', () => {
+        player.symbol = x;
+        computer.symbol = o;
+        board.narrator.textContent = "Player's Turn!";
+        gameOver = false;
+        player.turn = true;
+        computer.turn = false;
+        adjustButtonDisplay();
+    });
+
+    const oButton = document.querySelector('#o-button');
+    oButton.addEventListener('click', () => {
+        player.symbol = o;
+        computer.symbol = x;
+        gameOver = false;
+        player.turn = false;
+        computer.turn = true;
+        adjustButtonDisplay();
+        delayedTurn();
+    });
+
+    const adjustButtonDisplay = function() {
+        xButton.style.display = 'none';
+        oButton.style.display = 'none';
+        reset.style.display = 'inline';
+    };
+
     const computerTakesTurn = function() {
         let choice = null;
         function getRandomNumber() {
@@ -139,170 +164,135 @@ const game = (function() {
         getRandomNumber();
         if (board.array[choice] == null) {
             board.array[choice] = computer.symbol;
-            processTurn();
+            game.processTurn();
         } else {
             computerTakesTurn();
         }
     };
 
-    return { computerTakesTurn };
+    const processTurn = function () {
+        board.refreshDisplay();
+    
+        function playerWinsRound() {
+            gameOver = true;
+            board.narrator.textContent = "Player Wins!";
+            player.wins += 1;
+            board.playerWinTally.textContent = player.wins;
+            nextRound.style.display = 'inline';
+        };
+    
+        function computerWinsRound() {
+            gameOver = true;
+            board.narrator.textContent = "Computer Wins!";
+            computer.wins += 1;
+            board.computerWinTally.textContent = computer.wins;
+            nextRound.style.display = 'inline';
+        };
+    
+        if (board.array[1] == board.array[2] && board.array[1] == board.array[3] && board.array[1]){
+            if (board.array[1] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[4] == board.array[5] && board.array[4] == board.array[6] && board.array[4]) {
+            if (board.array[4] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[7] == board.array[8] && board.array[7] == board.array[9] && board.array[7]) {
+            if (board.array[7] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[1] == board.array[4] && board.array[1] == board.array[7] && board.array[1]) {
+            if (board.array[1] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[2] == board.array[5] && board.array[2] == board.array[8] && board.array[2]) {
+            if (board.array[2] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[3] == board.array[6] && board.array[3] == board.array[9] && board.array[3]) {
+            if (board.array[3] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[1] == board.array[5] && board.array[1] == board.array[9] && board.array[1]) {
+            if (board.array[1] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[7] == board.array[5] && board.array[7] == board.array[3] && board.array[7]) {
+            if (board.array[7] == player.symbol) {
+                playerWinsRound();
+            } else {
+                computerWinsRound();
+            }
+            return;
+        };
+    
+        if (board.array[1] && board.array[2] && board.array[3] && board.array[4] && board.array[5] && board.array[6] && board.array[7] && board.array[8] && board.array[9]) {
+            gameOver = true;
+            board.narrator.textContent = "It's a Tie!";
+            nextRound.style.display = 'inline';
+            return;
+        };
+        
+        if (player.turn) {
+            player.turn = false;
+            computer.turn = true;
+            delayedTurn();
+        } else {
+            player.turn = true;
+            computer.turn = false;
+            board.narrator.textContent = "Player's Turn!";
+        };
+    }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const delayedTurn = async () => {
+        board.narrator.textContent = "Computer's Turn!";
+        await delay(750);
+        game.computerTakesTurn();
+    };
+
+    return { computerTakesTurn, processTurn, xButton, oButton };
 
 })();
 
 
-processTurn = function () {
-    board.refreshDisplay();
-    checkForGameOver();
-}
-
-checkForGameOver = function () {
-    if (board.array[1] == board.array[2] && board.array[1] == board.array[3] && board.array[1]){
-        gameOver = true;
-        if (board.array[1] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[4] == board.array[5] && board.array[4] == board.array[6] && board.array[4]) {
-        gameOver = true;
-        if (board.array[4] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[7] == board.array[8] && board.array[7] == board.array[9] && board.array[7]) {
-        gameOver = true;
-        if (board.array[7] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[1] == board.array[4] && board.array[1] == board.array[7] && board.array[1]) {
-        gameOver = true;
-        if (board.array[1] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[2] == board.array[5] && board.array[2] == board.array[8] && board.array[2]) {
-        gameOver = true;
-        if (board.array[2] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[3] == board.array[6] && board.array[3] == board.array[9] && board.array[3]) {
-        gameOver = true;
-        if (board.array[3] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[1] == board.array[5] && board.array[1] == board.array[9] && board.array[1]) {
-        gameOver = true;
-        if (board.array[1] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[7] == board.array[5] && board.array[7] == board.array[3] && board.array[7]) {
-        gameOver = true;
-        if (board.array[7] == player.symbol) {
-            board.narrator.textContent = "Player Wins!";
-            player.wins += 1;
-        } else {
-            board.narrator.textContent = "Computer Wins!";
-            computer.wins += 1;
-        }
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        nextRound.style.display = 'inline';
-        return;
-    };
-
-    if (board.array[1] && board.array[2] && board.array[3] && board.array[4] && board.array[5] && board.array[6] && board.array[7] && board.array[8] && board.array[9]) {
-        gameOver = true;
-        board.narrator.textContent = "It's a Tie!";
-        nextRound.style.display = 'inline';
-        return;
-    };
-    
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-
-    if (player.turn) {
-        player.turn = false;
-        computer.turn = true;
-        const delayedTurn = async () => {
-            board.narrator.textContent = "Computer's Turn!";
-            await delay(750);
-            game.computerTakesTurn();
-        };
-        delayedTurn();
-    } else {
-        player.turn = true;
-        computer.turn = false;
-        board.narrator.textContent = "Player's Turn!";
-    };
-}
 
 const reset = document.querySelector('.reset');
-reset.style.display = 'none';
 reset.addEventListener('click', () => {
     board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
     player.wins = 0;
@@ -315,14 +305,13 @@ reset.addEventListener('click', () => {
     board.playerWinTally.textContent = player.wins;
     board.computerWinTally.textContent = computer.wins;
     board.narrator.textContent = "Pick X or O!";
-    xButton.style.display = 'inline';
-    oButton.style.display = 'inline';
+    game.xButton.style.display = 'inline';
+    game.oButton.style.display = 'inline';
     reset.style.display = 'none';
     nextRound.style.display = 'none';
 });
 
 const nextRound = document.querySelector('.new-game');
-nextRound.style.display = 'none';
 nextRound.addEventListener('click', () => {
     board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
     board.refreshDisplay();
@@ -345,34 +334,11 @@ nextRound.addEventListener('click', () => {
     }
 });
 
-const xButton = document.querySelector('#x-button');
-xButton.addEventListener('click', () => {
-    player.symbol = x;
-    computer.symbol = o;
-    board.narrator.textContent = "Player's Turn!";
-    gameOver = false;
-    player.turn = true;
-    computer.turn = false;
-    xButton.style.display = 'none';
-    oButton.style.display = 'none';
-    reset.style.display = 'inline';
-});
+//New game initializations here
 
-const oButton = document.querySelector('#o-button');
-oButton.addEventListener('click', () => {
-    player.symbol = o;
-    computer.symbol = x;
-    gameOver = false;
-    player.turn = false;
-    computer.turn = true;
-    xButton.style.display = 'none';
-    oButton.style.display = 'none';
-    reset.style.display = 'inline';
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    const delayedTurn = async () => {
-        board.narrator.textContent = "Computer's Turn!";
-        await delay(750);
-        game.computerTakesTurn();
-    };
-    delayedTurn();
-});
+board.narrator.textContent = "Pick X or O!";
+board.playerWinTally.textContent = player.wins;
+board.computerWinTally.textContent = computer.wins;
+let gameOver = true;
+reset.style.display = 'none';
+nextRound.style.display = 'none';
