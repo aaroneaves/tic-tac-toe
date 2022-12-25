@@ -28,82 +28,82 @@ const board = (function() {
     };
 
     one.addEventListener('click', () => {
-        if (board.array[1] || computer.turn || gameOver) {
+        if (array[1] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[1] = player.symbol;
+            array[1] = player.symbol;
             game.processTurn();
         }
     });
 
     two.addEventListener('click', () => {
-        if (board.array[2] || computer.turn || gameOver) {
+        if (array[2] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[2] = player.symbol;
+            array[2] = player.symbol;
             game.processTurn();
         }
     });
 
     three.addEventListener('click', () => {
-        if (board.array[3] || computer.turn || gameOver) {
+        if (array[3] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[3] = player.symbol;
+            array[3] = player.symbol;
             game.processTurn();
         }
     });
 
     four.addEventListener('click', () => {
-        if (board.array[4] || computer.turn || gameOver) {
+        if (array[4] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[4] = player.symbol;
+            array[4] = player.symbol;
             game.processTurn();
         }
     });
 
     five.addEventListener('click', () => {
-        if (board.array[5] || computer.turn || gameOver) {
+        if (array[5] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[5] = player.symbol;
+            array[5] = player.symbol;
             game.processTurn();
         }
     });
 
     six.addEventListener('click', () => {
-        if (board.array[6] || computer.turn || gameOver) {
+        if (array[6] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[6] = player.symbol;
+            array[6] = player.symbol;
             game.processTurn();
         }
     });
 
     seven.addEventListener('click', () => {
-        if (board.array[7] || computer.turn || gameOver) {
+        if (array[7] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[7] = player.symbol;
+            array[7] = player.symbol;
             game.processTurn();
         }
     });
 
     eight.addEventListener('click', () => {
-        if (board.array[8] || computer.turn || gameOver) {
+        if (array[8] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[8] = player.symbol;
+            array[8] = player.symbol;
             game.processTurn();
         }
     });
 
     nine.addEventListener('click', () => {
-        if (board.array[9] || computer.turn || gameOver) {
+        if (array[9] || computer.turn || gameOver) {
             return;
         } else {
-            board.array[9] = player.symbol;
+            array[9] = player.symbol;
             game.processTurn();
         }
     });
@@ -318,7 +318,7 @@ const game = (function() {
         };
     };
 
-    return { processTurn, xButton, oButton, reset, nextRound, initialize };
+    return { processTurn, initialize};
 
 })();
 
