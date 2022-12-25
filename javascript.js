@@ -1,22 +1,21 @@
+//Board Object
+
 const board = (function() {
     let array = ["leave this blank", null, null, null, null, null, null, null, null, null];
-    const narrator = document.querySelector('.narrator');
-    const playerWinTally = document.querySelector('#player-wins');
-    const computerWinTally = document.querySelector('#computer-wins');
+    //not sure why these variables are globally scoped
+    const one = document.querySelector('#one');
+    const two = document.querySelector('#two');
+    const three = document.querySelector('#three');
+    const four = document.querySelector('#four');
+    const five = document.querySelector('#five');
+    const six = document.querySelector('#six');
+    const seven = document.querySelector('#seven');
+    const eight = document.querySelector('#eight');
+    const nine = document.querySelector('#nine');
+    //
 
     const refreshDisplay = () => {
-        //not sure why these variables are globally scoped
-        const one = document.querySelector('#one');
-        const two = document.querySelector('#two');
-        const three = document.querySelector('#three');
-        const four = document.querySelector('#four');
-        const five = document.querySelector('#five');
-        const six = document.querySelector('#six');
-        const seven = document.querySelector('#seven');
-        const eight = document.querySelector('#eight');
-        const nine = document.querySelector('#nine');
-        
-        //not sure why I can't just call array without calling board object
+        //not sure why I can't just call array without calling board object (here or in the event listeners). Same issue with gameOver in game Object
         one.textContent = board.array[1];
         two.textContent = board.array[2];
         three.textContent = board.array[3];
@@ -29,7 +28,7 @@ const board = (function() {
     };
 
     one.addEventListener('click', () => {
-        if (board.array[1] || computer.turn || gameOver) {
+        if (board.array[1] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[1] = player.symbol;
@@ -38,7 +37,7 @@ const board = (function() {
     });
 
     two.addEventListener('click', () => {
-        if (board.array[2] || computer.turn || gameOver) {
+        if (board.array[2] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[2] = player.symbol;
@@ -47,7 +46,7 @@ const board = (function() {
     });
 
     three.addEventListener('click', () => {
-        if (board.array[3] || computer.turn || gameOver) {
+        if (board.array[3] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[3] = player.symbol;
@@ -56,7 +55,7 @@ const board = (function() {
     });
 
     four.addEventListener('click', () => {
-        if (board.array[4] || computer.turn || gameOver) {
+        if (board.array[4] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[4] = player.symbol;
@@ -65,7 +64,7 @@ const board = (function() {
     });
 
     five.addEventListener('click', () => {
-        if (board.array[5] || computer.turn || gameOver) {
+        if (board.array[5] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[5] = player.symbol;
@@ -74,7 +73,7 @@ const board = (function() {
     });
 
     six.addEventListener('click', () => {
-        if (board.array[6] || computer.turn || gameOver) {
+        if (board.array[6] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[6] = player.symbol;
@@ -83,7 +82,7 @@ const board = (function() {
     });
 
     seven.addEventListener('click', () => {
-        if (board.array[7] || computer.turn || gameOver) {
+        if (board.array[7] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[7] = player.symbol;
@@ -92,7 +91,7 @@ const board = (function() {
     });
 
     eight.addEventListener('click', () => {
-        if (board.array[8] || computer.turn || gameOver) {
+        if (board.array[8] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[8] = player.symbol;
@@ -101,7 +100,7 @@ const board = (function() {
     });
 
     nine.addEventListener('click', () => {
-        if (board.array[9] || computer.turn || gameOver) {
+        if (board.array[9] || computer.turn || game.gameOver) {
             return;
         } else {
             board.array[9] = player.symbol;
@@ -109,20 +108,29 @@ const board = (function() {
         }
     });
 
-    return { refreshDisplay, array, narrator, playerWinTally, computerWinTally };
+    return { refreshDisplay, array };
 
 })();
 
-//game object here
+//Game Object
 
 const game = (function() {
+
+    const narrator = document.querySelector('.narrator');
+    const playerWinTally = document.querySelector('#player-wins');
+    const computerWinTally = document.querySelector('#computer-wins');
+
+    const x = "x";
+    const o = "o";
+
+    let gameOver = true;
 
     const xButton = document.querySelector('#x-button');
     xButton.addEventListener('click', () => {
         player.symbol = x;
         computer.symbol = o;
-        gameOver = false;
-        board.narrator.textContent = "Player's Turn!";
+        game.gameOver = false;
+        narrator.textContent = "Player's Turn!";
         player.turn = true;
         computer.turn = false;
         adjustButtonDisplay();
@@ -132,7 +140,7 @@ const game = (function() {
     oButton.addEventListener('click', () => {
         player.symbol = o;
         computer.symbol = x;
-        gameOver = false;
+        game.gameOver = false;
         player.turn = false;
         computer.turn = true;
         adjustButtonDisplay();
@@ -149,12 +157,12 @@ const game = (function() {
     nextRound.addEventListener('click', () => {
         board.array = ["leave this blank", null, null, null, null, null, null, null, null, null];
         board.refreshDisplay();
-        gameOver = false;
+        game.gameOver = false;
         nextRound.style.display = 'none';
         if (player.symbol == x) {
             player.turn = true;
             computer.turn = false;
-            board.narrator.textContent = "Player's Turn!";
+            narrator.textContent = "Player's Turn!";
         } else {
             player.turn = false;
             computer.turn = true;
@@ -172,9 +180,9 @@ const game = (function() {
         player.symbol = null;
         computer.symbol = null;
         board.refreshDisplay();
-        board.playerWinTally.textContent = player.wins;
-        board.computerWinTally.textContent = computer.wins;
-        board.narrator.textContent = "Pick X or O!";
+        playerWinTally.textContent = player.wins;
+        computerWinTally.textContent = computer.wins;
+        narrator.textContent = "Pick X or O!";
         xButton.style.display = 'inline';
         oButton.style.display = 'inline';
         reset.style.display = 'none';
@@ -183,7 +191,7 @@ const game = (function() {
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const delayedTurn = async () => {
-        board.narrator.textContent = "Computer's Turn!";
+        narrator.textContent = "Computer's Turn!";
         await delay(750);
         computerTakesTurn();
     };
@@ -208,18 +216,18 @@ const game = (function() {
         board.refreshDisplay();
     
         function playerWinsRound() {
-            gameOver = true;
-            board.narrator.textContent = "Player Wins!";
+            game.gameOver = true;
+            narrator.textContent = "Player Wins!";
             player.wins += 1;
-            board.playerWinTally.textContent = player.wins;
+            playerWinTally.textContent = player.wins;
             nextRound.style.display = 'inline';
         };
     
         function computerWinsRound() {
-            gameOver = true;
-            board.narrator.textContent = "Computer Wins!";
+            game.gameOver = true;
+            narrator.textContent = "Computer Wins!";
             computer.wins += 1;
-            board.computerWinTally.textContent = computer.wins;
+            computerWinTally.textContent = computer.wins;
             nextRound.style.display = 'inline';
         };
     
@@ -296,8 +304,8 @@ const game = (function() {
         };
     
         if (board.array[1] && board.array[2] && board.array[3] && board.array[4] && board.array[5] && board.array[6] && board.array[7] && board.array[8] && board.array[9]) {
-            gameOver = true;
-            board.narrator.textContent = "It's a Tie!";
+            game.gameOver = true;
+            narrator.textContent = "It's a Tie!";
             nextRound.style.display = 'inline';
             return;
         };
@@ -309,48 +317,31 @@ const game = (function() {
         } else {
             player.turn = true;
             computer.turn = false;
-            board.narrator.textContent = "Player's Turn!";
+            narrator.textContent = "Player's Turn!";
         };
     };
 
     const initialize = function() {
-        board.narrator.textContent = "Pick X or O!";
+        narrator.textContent = "Pick X or O!";
         reset.style.display = 'none';
         nextRound.style.display = 'none';
     };
 
-    return { processTurn, initialize};
+    return { processTurn, initialize, gameOver};
 
 })();
 
-//Player stuff here
+//Player Factory
 
-// const playerFactory = (id) => {
-//     let name = id;
-//     let turn = false;
-//     let wins = false;
-//     let symbol = null;
-//     return { name, turn, wins, symbol};
-// }
-
-// const player = playerFactory('player');
-// const computer = playerFactory('computer');
-
-const x = "x";
-const o = "o";
-
-let player = {
-    turn: false,
-    wins: 0,
-    symbol: null
+const playerFactory = (id) => {
+    let name = id;
+    let turn = false;
+    let wins = false;
+    let symbol = null;
+    return { name, turn, wins, symbol};
 }
 
-let computer = {
-    turn: false,
-    wins: 0,
-    symbol: null
-};
-
-//New game initializations here
-let gameOver = true;
+//Initialization
+const player = playerFactory('player');
+const computer = playerFactory('computer');
 game.initialize();
