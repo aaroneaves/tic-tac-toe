@@ -1,11 +1,11 @@
 const board = (function() {
-    const array = ["leave this blank", null, null, null, null, null, null, null, null, null];
+    let array = ["leave this blank", null, null, null, null, null, null, null, null, null];
     const narrator = document.querySelector('.narrator');
     const playerWinTally = document.querySelector('#player-wins');
     const computerWinTally = document.querySelector('#computer-wins');
 
     const refreshDisplay = () => {
-        //not entirely sure why these variables are globally scoped
+        //not sure why these variables are globally scoped
         const one = document.querySelector('#one');
         const two = document.querySelector('#two');
         const three = document.querySelector('#three');
@@ -15,7 +15,8 @@ const board = (function() {
         const seven = document.querySelector('#seven');
         const eight = document.querySelector('#eight');
         const nine = document.querySelector('#nine');
-        //
+        
+        //not sure why I can't just call array without calling board object
         one.textContent = board.array[1];
         two.textContent = board.array[2];
         three.textContent = board.array[3];
@@ -28,82 +29,82 @@ const board = (function() {
     };
 
     one.addEventListener('click', () => {
-        if (array[1] || computer.turn || gameOver) {
+        if (board.array[1] || computer.turn || gameOver) {
             return;
         } else {
-            array[1] = player.symbol;
+            board.array[1] = player.symbol;
             game.processTurn();
         }
     });
 
     two.addEventListener('click', () => {
-        if (array[2] || computer.turn || gameOver) {
+        if (board.array[2] || computer.turn || gameOver) {
             return;
         } else {
-            array[2] = player.symbol;
+            board.array[2] = player.symbol;
             game.processTurn();
         }
     });
 
     three.addEventListener('click', () => {
-        if (array[3] || computer.turn || gameOver) {
+        if (board.array[3] || computer.turn || gameOver) {
             return;
         } else {
-            array[3] = player.symbol;
+            board.array[3] = player.symbol;
             game.processTurn();
         }
     });
 
     four.addEventListener('click', () => {
-        if (array[4] || computer.turn || gameOver) {
+        if (board.array[4] || computer.turn || gameOver) {
             return;
         } else {
-            array[4] = player.symbol;
+            board.array[4] = player.symbol;
             game.processTurn();
         }
     });
 
     five.addEventListener('click', () => {
-        if (array[5] || computer.turn || gameOver) {
+        if (board.array[5] || computer.turn || gameOver) {
             return;
         } else {
-            array[5] = player.symbol;
+            board.array[5] = player.symbol;
             game.processTurn();
         }
     });
 
     six.addEventListener('click', () => {
-        if (array[6] || computer.turn || gameOver) {
+        if (board.array[6] || computer.turn || gameOver) {
             return;
         } else {
-            array[6] = player.symbol;
+            board.array[6] = player.symbol;
             game.processTurn();
         }
     });
 
     seven.addEventListener('click', () => {
-        if (array[7] || computer.turn || gameOver) {
+        if (board.array[7] || computer.turn || gameOver) {
             return;
         } else {
-            array[7] = player.symbol;
+            board.array[7] = player.symbol;
             game.processTurn();
         }
     });
 
     eight.addEventListener('click', () => {
-        if (array[8] || computer.turn || gameOver) {
+        if (board.array[8] || computer.turn || gameOver) {
             return;
         } else {
-            array[8] = player.symbol;
+            board.array[8] = player.symbol;
             game.processTurn();
         }
     });
 
     nine.addEventListener('click', () => {
-        if (array[9] || computer.turn || gameOver) {
+        if (board.array[9] || computer.turn || gameOver) {
             return;
         } else {
-            array[9] = player.symbol;
+            board.array[9] = player.symbol;
             game.processTurn();
         }
     });
@@ -115,12 +116,6 @@ const board = (function() {
 //game object here
 
 const game = (function() {
-
-    const initialize = function() {
-        board.narrator.textContent = "Pick X or O!";
-        reset.style.display = 'none';
-        nextRound.style.display = 'none';
-    };
 
     const xButton = document.querySelector('#x-button');
     xButton.addEventListener('click', () => {
@@ -318,11 +313,28 @@ const game = (function() {
         };
     };
 
+    const initialize = function() {
+        board.narrator.textContent = "Pick X or O!";
+        reset.style.display = 'none';
+        nextRound.style.display = 'none';
+    };
+
     return { processTurn, initialize};
 
 })();
 
 //Player stuff here
+
+// const playerFactory = (id) => {
+//     let name = id;
+//     let turn = false;
+//     let wins = false;
+//     let symbol = null;
+//     return { name, turn, wins, symbol};
+// }
+
+// const player = playerFactory('player');
+// const computer = playerFactory('computer');
 
 const x = "x";
 const o = "o";
