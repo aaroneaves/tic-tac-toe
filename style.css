@@ -31,27 +31,27 @@ body {
     font-size: 100px;
 }
 
+#zero,
 #one,
-#two,
-#three {
+#two {
     border-top: none;
 }
 
-#three,
-#six,
-#nine {
+#two,
+#five,
+#eight {
     border-right: none;
 }
 
+#six,
 #seven,
-#eight,
-#nine {
+#eight {
     border-bottom: none;
 }
 
-#one,
-#four,
-#seven {
+#zero,
+#three,
+#six {
     border-left: none;
 }
 
