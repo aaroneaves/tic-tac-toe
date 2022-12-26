@@ -3,20 +3,15 @@
 const board = (function() {
     let array = [null, null, null, null, null, null, null, null, null];
 
+    //not sure why I can't call a variable (without referencing the object) when the variable was defined in the same scope as my function 
     const refreshDisplay = () => {
-        //not sure why I can't just call array without calling board object (here or in the event listeners). Same issue with gameOver in game Object
-        zero.textContent = board.array[0];
-        one.textContent = board.array[1];
-        two.textContent = board.array[2];
-        three.textContent = board.array[3];
-        four.textContent = board.array[4];
-        five.textContent = board.array[5];
-        six.textContent = board.array[6];
-        seven.textContent = board.array[7];
-        eight.textContent = board.array[8];
+        boxes.forEach((box) => {
+            const index = boxesArray.indexOf(box);
+            box.textContent = board.array[index];   
+        });
     };
 
-    boxes = document.querySelectorAll('.box');
+    const boxes = document.querySelectorAll('.box');
     const boxesArray = Array.prototype.slice.call(boxes);
     boxes.forEach((box) => {
         const index = boxesArray.indexOf(box);
