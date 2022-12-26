@@ -2,10 +2,89 @@ body {
     margin: 0px;
     padding: 0px;
     position: relative;
+    background-color: black;
 }
 
 * {
     box-sizing: border-box;
+}
+
+.narrator {
+    font-weight: bold;
+    font-size: 75px;
+    position: fixed;
+    width: max-content;
+    height: min-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    left: 0;
+    right: 0;
+    color: white;
+}
+
+.left-container {
+    margin-left: 80px;
+    margin-top: 80px;
+    display: grid;
+    width: min-content;
+    justify-items: center;
+    row-gap: 20px;
+    position: fixed;
+}
+
+.meta-data {
+    border: 2px solid white;
+    width: 200px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 28px;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 11px;
+    row-gap: 10px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.meta-left {
+    text-align: right;
+    margin-left: 5px;
+}
+
+.wins {
+    text-align: center;
+}
+
+
+button {
+    width: 120px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.pick-symbol {
+    background-color: #4597e8;
+    width: 50px;
+    height: 50px;
+    font-weight: bold;
+}
+
+#x-button {
+    margin-right: 5px;
+}
+
+.new-game {
+    background-color: #45e845;
+    color: black;
+}
+
+.reset {
+    background-color: #e84545;
 }
 
 .box-container {
@@ -25,9 +104,10 @@ body {
 .box {
     height: 200px;
     width: 200px;
-    border: 1px black solid;
+    border: 1px white solid;
     text-align: center;
     line-height: 200px;
+    color: white;
     font-size: 100px;
 }
 
@@ -53,68 +133,4 @@ body {
 #three,
 #six {
     border-left: none;
-}
-
-.narrator {
-    text-align: center;
-    font-weight: bold;
-    font-size: 75px;
-    margin-top: 40px;
-}
-
-.left-container {
-    margin-left: 40px;
-    display: grid;
-    width: min-content;
-    justify-items: center;
-    row-gap: 20px;
-}
-
-.meta-data {
-    border: 2px solid black;
-    width: 200px;
-    border-radius: 5px;
-    background-color: rgba(128, 128, 128, 0.243);
-    font-weight: bold;
-    font-size: 28px;
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    grid-template-rows: 1fr 1fr;
-    padding: 11px;
-    row-gap: 10px;
-}
-
-.meta-left {
-    text-align: right;
-}
-
-.wins {
-    text-align: center;
-}
-
-.reset {
-    background-color: red;
-}
-
-.new-game {
-    background-color: green;
-}
-
-button {
-    width: 160px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
-}
-
-.pick-symbol {
-    background-color: grey;
-    width: 50px;
-    height: 50px;
-    font-weight: bold;
-}
-
-#x-button {
-    margin-right: 5px;
 }

@@ -40,8 +40,8 @@ const game = (function() {
     const computerWinTally = document.querySelector('#computer-wins');
     let gameOver = true;
 
-    const x = "x";
-    const o = "o"; 
+    const x = "\u274C";
+    const o = "\u20DD"; 
 
     const xButton = document.querySelector('#x-button');
     xButton.addEventListener('click', () => {
